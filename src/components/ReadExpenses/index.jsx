@@ -1,9 +1,25 @@
-import React from 'react'
+import React, { useContext } from "react";
+import { ExpenseContext } from "../context/ExpenseProvider";
+import { Link } from "react-router-dom";
+import Expense from "../Expense";
 
 const Expenses = () => {
-  return (
-    <div>Expenses</div>
-  )
-}
+  const { expenses } = useContext(ExpenseContext);
 
-export default Expenses
+  return (
+    <div>
+      <h3>Create Expense</h3>
+      <p>{expenses.join(",")}</p>
+
+      {expenses.map((exp) => {
+        return <Expense key={exp} expense={exp} />;
+      })}
+
+      <Link to={`/create`}>
+        <button>Create Expense</button>
+      </Link>
+    </div>
+  );
+};
+
+export default Expenses;
